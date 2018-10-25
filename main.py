@@ -129,6 +129,10 @@ def signup():
     return render_template("user-signup.html", form=form, error=error)
 
 
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    form = signupForm()
+    return render_template('login.html', form=form)
 
 
 if __name__ == '__main__':
