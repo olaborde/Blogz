@@ -41,10 +41,12 @@
 
                 <!-- <section class="collapse navbar-collapse" id="myToggler-Nav"> -->
                 <div class="navbar-nav ">
-                    <a class="nav-item nav-link" href="#">All post</a>
-                    <a class="nav-item nav-link" href="#">New post</a>
-                    <a class="nav-item nav-link" href="#"><button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#exampleModalCenter"><i class="fas fa-sign-in-alt fa-lg"></i></button></a>
+                    <a class="nav-item nav-link" href="{{ url_for('index') }}">All post</a>
+                    <a class="nav-item nav-link" href="{{ url_for('newpost') }}">New post</a>
+                    <a class="nav-item nav-link" href="{{ url_for('signup') }}">Signup</a>
+                    <a class="nav-item nav-link" href="{{ url_for('newpost') }}">login</a>
+                    <!-- <a class="nav-item nav-link" href="#"><button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#exampleModalCenter"><i class="fas fa-sign-in-alt fa-lg"></i></button></a> -->
                 </div>
                 <!-- </section> -->
 
@@ -100,7 +102,8 @@
                             <div class="container-wrapper container d-flex justify-content-center align-items-center">
                                 <div class="form-wrapper text-center">
                                     <h2 class="text-center">Sign Up</h2>
-                                    <form>
+                                    <!-- Signup form -->
+                                    <form method="POST" action="/signup">
                                         <div class="name-wrapper d-flex">
                                             <div class="form-group first-name">
                                                 <input type="text" class="form-control" id="first-name-input"
@@ -151,35 +154,7 @@
     <div class="container">
         <center><h2>Vanity Blog</h2></center>
         
-        <div class="row">
         
-            <div class="col s12 m4 l8">
-                
-                <div class="row">
-                    <div class="col s12 m6 l3">
-                        <p></p>
-                    </div>
-                    <div class="col s12 m6 l3">
-                       
-                    </div>
-                    <div class="col s12 m6 l3">
-                        <a href="{{ url_for('index') }}" class="waves-effect waves-light btn">Main Blog page</a>
-                    </div>
-                    <div>
-
-                    </div>
-                    <div class="col s12 m6 l3">
-                        <a href="{{ url_for('newpost') }}" class="waves-effect waves-light btn">Add a blog entry</a>
-                    </div>
-                </div>
-        
-                
-        
-                
-            </div>
-        
-        </div>  
-    </div>
 
 
 
