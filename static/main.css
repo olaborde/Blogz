@@ -54,3 +54,9 @@ body>.container {
 code {
     font-size: 80%;
 }
+
+
+.main-signup{
+    background-color: bisque;
+    margin-top: 20px;
+}
