@@ -14,3 +14,12 @@ class signupForm(Form):
     vpassword = PasswordField('verify password', validators=[DataRequired(), Length(min=3, message="password should be between 3 and 20 characteres")])
     email = EmailField('email', validators=[EmailField])
     submit = SubmitField('signup')
+
+
+class loginForm(Form):
+    
+    
+    email = EmailField('email', validators=[EmailField])
+    password = PasswordField('password', validators=[DataRequired(), Length(min=3, message="password should be between 3 and 20 characteres"), validators.EqualTo('vpassword', message='password mnust match')])
+   
+    submit = SubmitField('login')    
