@@ -2,7 +2,7 @@ from flask import Flask, request, redirect, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug import generate_password_hash, check_password_hash
 from datetime import datetime
-from form import signupForm
+from form import signupForm, loginForm
 
 
 
@@ -131,7 +131,7 @@ def signup():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-    form = signupForm()
+    form = loginForm()
     return render_template('login.html', form=form)
 
 
