@@ -1,23 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div class="row">
-     {% for blog in blogs %}
-    <div class="col s12 m6">
-       
-        <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
-                <span class="card-title">{{blog.title}}</span>
-                <p>{{blog.description}}</p>
-            </div>
-            <div class="card-action">
-                <a href="{{ url_for('blog', blog_id=blog.id) }}">View entry</a>
-                
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
+
+<div class="blog-post">
+{% for blog in blogs %}
+    <h2 class="blog-post-title">{{blog.title}}</h2>
+    <p class="blog-post-meta">Posted on {{date_posted}} by <a href="#">{{blog.publisher}}</a></p>
+ 
+    <p>{{blog.description}}</p>
+    <a href="{{ url_for('blog', blog_id=blog.id) }}">View entry</a>
+    <hr>
+{% endfor %}
+</div>    
     
 
 

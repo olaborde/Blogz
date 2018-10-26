@@ -22,7 +22,7 @@
         <div class="navbar navbar-expand-md bg-info navbar-dark">
 
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"><i class="fas fa-home fa-lg"></i></a>
+                <a class="navbar-brand" href="{{ url_for('index') }}"><i class="fas fa-home fa-lg"></i></a>
 
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#myToggler-Nav"
                     aria-controls="#myToggler-Nav" aria-label="myToggler-Nav">
@@ -152,17 +152,16 @@
 
     <body class="main">
     <div class="container">
-        <center><h2>Vanity Blog</h2></center>
+         <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+        <div class="col-md-6 px-0">
+          <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
+          <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.</p>
+          <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
+        </div>
+      </div>
         
         
-
-
-
-
-
-
-
-
+        
      {% block content %}
     {% endblock %}
 
@@ -178,10 +177,11 @@
         crossorigin="anonymous"></script>
 </body>
 
-<footer class="footer">
-    <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
-    </div>
+<footer class="blog-footer">
+    <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+    <p>
+        <a href="#">Back to top</a>
+    </p>
 </footer>
 
 </html>
