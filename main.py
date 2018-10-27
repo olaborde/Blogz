@@ -1,5 +1,8 @@
 from flask import Flask, request, redirect, render_template, url_for, session
 from flask_sqlalchemy import SQLAlchemy
+# import flask.ext.whooshalchemy
+import flask_whooshalchemy as wa
+
 from werkzeug import generate_password_hash, check_password_hash
 from datetime import datetime
 from form import signupForm, loginForm
@@ -10,6 +13,8 @@ app = Flask(__name__, static_url_path='')
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://blogz:password@localhost:8889/blogz'
 app.config['SQLALCHEMY_ECHO'] = True
+app.config['QLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['WHOOSH_BASE'] = 'whoosh'
 db = SQLAlchemy(app)
 
 
@@ -44,6 +49,8 @@ class User(db.Model):
 
 class Blog(db.Model):
 
+    __searchable__ = ['title', 'description']
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(120), nullable=False)
     description = db.Column(db.Text, nullable=False)
@@ -58,6 +65,8 @@ class Blog(db.Model):
         self.description = description
         self.user_id = user_id
         self.date_posted = datetime.now()
+
+wa.whoosh_index(app, Blog)
 
 blogs = []
 
@@ -123,12 +132,12 @@ def signup():
             elif ' ' in (request.form['password']).strip() == True:
                 flash('No spaces allowed!')
                 return redirect(url_for('signup'))
-            elif ' ' in (request.form['user_name']).strip() == True:
-                flash('No spaces allowed in username!')
-                return redirect(url_for('signup'))
-            elif len(request.form['user_name']) < 3 or len(request.form['user_name']) > 20:
-                flash('username must between 3 or 20 characters!')
-                return redirect(url_for('signup')) 
+            # elif ' ' in (request.form['user_name']).strip() == True:
+            #     flash('No spaces allowed in username!')
+            #     return redirect(url_for('signup'))
+            # elif len(request.form['user_name']) < 3 or len(request.form['user_name']) > 20:
+            #     flash('username must between 3 or 20 characters!')
+            #     return redirect(url_for('signup')) 
             else: 
                 newuser = User(form.firstname.data, form.lastname.data, form.email.data, form.password.data)
                 db.session.add(newuser)
@@ -166,6 +175,11 @@ def login():
 def logout():
     session.pop('email', None)
     return redirect(url_for('index'))
+
+@app.route('/search')
+def search():
+    blogs = Blog.query.whoosh_search(request.args.get('query')).all()
+    return render_template('index.html', blogs=blogs)
 
 if __name__ == '__main__':
     app.run()
