@@ -11,7 +11,7 @@ class signupForm(Form):
     firstname = StringField('firstname', validators=[DataRequired("Please enter a username")])
     lastname = StringField('lastname', validators=[DataRequired("Please enter a username")])
     password = PasswordField('password', validators=[DataRequired(), Length(min=3, message="password should be between 3 and 20 characteres"), validators.EqualTo('vpassword', message='password mnust match')])
-    vpassword = PasswordField('verify password', validators=[DataRequired(), Length(min=3, message="password should be between 3 and 20 characteres")])
+    # vpassword = PasswordField('verify password', validators=[DataRequired(), Length(min=3, message="password should be between 3 and 20 characteres")])
     email = EmailField('email', validators=[EmailField])
     submit = SubmitField('signup')
 
