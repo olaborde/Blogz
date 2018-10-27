@@ -24,7 +24,7 @@ class User(db.Model):
     firstname = db.Column(db.String(120))
     lastname  = db.Column(db.String(120))
     email     = db.Column(db.String(120), unique=True)
-    pwdhash   = db.Column(db.String(60))
+    pwdhash   = db.Column(db.String(300))
     blogs = db.relationship('Blog', backref='author', lazy='dynamic')
 
 
