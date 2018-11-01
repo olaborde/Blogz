@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="blog-post">
+ 
+        <!-- <img class="rounded-circle " src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}"> -->
+        <h2 class="blog-post-title">{{post.title}}</h2>
+        <p class="blog-post-meta">Posted on {{post.date_posted.strftime('%m/%d/%Y')}} by <a  href="{{ url_for('singleUser', username=post.author.username) }}">{{post.author.username}}</a></p>
+        <hr>
+
+</div>
+
+{% endblock %}

@@ -3,12 +3,25 @@
 
 
 <div class="blog-post">
-    {% for post in posts %}
-        <h2 class="blog-post-title">{{post.title}}</h2>
-        <p class="blog-post-meta">Posted on {{post.date_posted}} by <a href="#">{{post.author}}</a></p>
+    {% for post in posts.items %}
+        <!-- <img class="rounded-circle " src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}"> -->
+        <h2 class="blog-post-title"><a href="{{ url_for('post', post_id=post.id) }}">{{post.title}}</a></h2>
+        <p class="blog-post-meta">Posted on {{post.date_posted.strftime('%m/%d/%Y')}} by <a  href="{{ url_for('singleUser', username=post.author.username) }}">{{post.author.username}}</a></p>
         <hr>
     {% endfor %}
 </div>
+{% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+      {% if page_num %}
+        {% if posts.page == page_num %}
+          <a class="btn btn-info mb-4" href="{{ url_for('index', page=page_num) }}">{{ page_num }}</a>
+        {% else %}
+          <a class="btn btn-outline-info mb-4" href="{{ url_for('index', page=page_num) }}">{{ page_num }}</a>
+        {% endif %}
+      {% else %}
+        ...
+      {% endif %}
+
+{% endfor %}
 
 
 

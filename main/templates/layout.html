@@ -46,10 +46,10 @@
             <!-- <section class="collapse navbar-collapse" id="myToggler-Nav"> -->
             <div class="navbar-nav ">
                 <a class="nav-item nav-link" href="{{ url_for('index') }}">All post</a>
-                <a class="nav-item nav-link" href="#">New post</a>
                 {% if current_user.is_authenticated %}
+                    <a class="nav-item nav-link" href="{{ url_for('newpost') }}">New post</a>
                     <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
-                    <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>
+                    <!-- <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a> -->
                 {% else %}
                     <a class="nav-item nav-link" href="{{ url_for('signup') }}">Signup</a>
                     <a class="nav-item nav-link" href="{{ url_for('login') }}">login</a>
