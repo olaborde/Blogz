@@ -1,6 +1,6 @@
 # Blogz
 
-#Run with:
+# Run with:
 
 python run.py
 or
