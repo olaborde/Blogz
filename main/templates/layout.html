@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% if title %}
+        <title>Blogz - {{title}}</title>
+    {% else %}
+        <title>Blogz</title>
+    {% endif %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css')}}">
+    <!-- font Awesome CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+        crossorigin="anonymous">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+        crossorigin="anonymous">
+</head>
+
+
+<header>
+
+    <div class="navbar navbar-expand-md bg-info navbar-dark">
+
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('index') }}"><i class="fas fa-home fa-lg"></i></a>
+
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#myToggler-Nav"
+                aria-controls="#myToggler-Nav" aria-label="myToggler-Nav">
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div>
+
+                <form class="form-inline" method="GET" action="search">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+
+
+            <!-- <section class="collapse navbar-collapse" id="myToggler-Nav"> -->
+            <div class="navbar-nav ">
+                <a class="nav-item nav-link" href="{{ url_for('index') }}">All post</a>
+                <a class="nav-item nav-link" href="#">New post</a>
+                {% if current_user.is_authenticated %}
+                    <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>
+                {% else %}
+                    <a class="nav-item nav-link" href="{{ url_for('signup') }}">Signup</a>
+                    <a class="nav-item nav-link" href="{{ url_for('login') }}">login</a>
+                {% endif %}
+                <!-- <a class="nav-item nav-link" href="#"><button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#exampleModalCenter"><i class="fas fa-sign-in-alt fa-lg"></i></button></a> -->
+            </div>
+            <!-- </section> -->
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab"
+                            aria-controls="login" aria-selected="true">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="signup-tab" data-toggle="tab" href="#signup" role="tab" aria-controls="signup"
+                            aria-selected="false">Signup</a>
+                    </li>
+
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                        <div class="container-wrapper container d-flex justify-content-center align-items-center">
+                            <div class="form-wrapper text-center">
+                                <h2 class="text-center">Login</h2>
+                                <form>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="email" placeholder="Enter Email">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" id="password" placeholder="Password">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Submit</button>
+                                </form>
+                                <small><a href="#">Need an Account?</a></small>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+                        <div class="container-wrapper container d-flex justify-content-center align-items-center">
+                            <div class="form-wrapper text-center">
+                                <h2 class="text-center">Sign Up</h2>
+                                <!-- Signup form -->
+                                <form method="POST" action="/signup">
+                                    <div class="name-wrapper d-flex">
+                                        <div class="form-group first-name">
+                                            <input type="text" class="form-control" id="first-name-input" placeholder="First Name"
+                                                formControlName="firstName">
+                                        </div>
+                                        <div class="form-group last-name">
+                                            <input type="text" class="form-control" id="last-name-input" placeholder="Last Name"
+                                                formControlName="lastName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="email-input" placeholder="Enter Email">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" id="password-input" placeholder="Password">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">Submit</button>
+                                </form>
+                                <small><a href="#">Already have an Account?</a></small>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                      
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form> -->
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<body class="main">
+    <div class="container">
+        <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+            <div class="col-md-6 px-0">
+                <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
+                <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and
+                    efficiently about what's most interesting in this post's contents.</p>
+                <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
+            </div>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+
+
+        {% block content %}
+        {% endblock %}
+
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+            crossorigin="anonymous"></script>
+    </div>        
+</body>
+
+<!-- <footer class="blog-footer">
+    <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+    <p>
+        <a href="#">Back to top</a>
+    </p>
+</footer> -->
+
+</html>
